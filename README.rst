@@ -1,7 +1,7 @@
 fwrite
 =======
 
-Python script to create files of the desired size.
+Create files of the desired size.
 
 Install
 -------
