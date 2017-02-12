@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-# fwrite 0.1
+# fwrite 0.2
 # author: Pedro Buteri Gonring
 # email: pedro@bigode.net
-# date: 07/02/2017
+# date: 12/02/2017
 
 import random
 import string
@@ -11,7 +11,7 @@ import optparse
 import sys
 
 
-version = '0.1'
+version = '0.2'
 
 
 # Parse and validate arguments
@@ -19,13 +19,10 @@ def get_parsed_args():
     usage = 'usage: %prog filename size [options]'
     # Create the parser
     parser = optparse.OptionParser(
-        description='create files of the desired size',
+        description="create files of the desired size, e.g., "
+                    "'fwrite test 10M'",
         usage=usage, version=version
     )
-    parser.add_option('-u', dest='unit', type='choice', default='kb',
-                      choices=['kb', 'mb', 'gb'],
-                      help='unit of measurement: kb, mb or gb \
-                      (default: %default)')
     parser.add_option('-r', '--random', action='store_true', default=False,
                       help='use random data (very slow)')
     parser.add_option('-n', '--newlines', action='store_true', default=False,
@@ -42,12 +39,16 @@ def get_parsed_args():
     # Some args validation
     if len(args) != 2:
         parser.error('filename or size not informed')
+    # Slice and validate size
+    size = args[1].upper()
+    if size[-1] not in ['K', 'M', 'G']:
+        parser.error('missing or invalid unit of measurement (K, M or G)')
     try:
-        size = int(args[1])
+        int(size[:-1])
     except ValueError:
-        parser.error('size must be an int')
-    if size <= 0:
-        parser.error('size must be a positive number')
+        parser.error('invalid size')
+    if int(size[:-1]) <= 0:
+        parser.error('size must be greater than zero')
     args[1] = size
     return (options, args)
 
@@ -57,28 +58,28 @@ def cli():
     (options, args) = get_parsed_args()
 
     filename = args[0]
-    size = args[1]
-    linesize = 1024
+    size = int(args[1][:-1])
+    block = 1024
 
-    if options.unit == 'mb':
+    if args[1][-1] == 'M':
         size = size * 1024
-    elif options.unit == 'gb':
+    elif args[1][-1] == 'G':
         size = size * 1024 * 1024
 
     if options.newlines:
-        line = '0' * (linesize - 1) + '\n'
+        line = '0' * (block - 1) + '\n'
     else:
-        line = '0' * linesize
+        line = '0' * block
 
     newfile = open(filename, 'wb')
 
     for _ in range(size):
         if options.random and options.newlines:
             line = ''.join(random.choice(string.ascii_letters)
-                           for _ in range(linesize - 1)) + '\n'
+                           for _ in range(block - 1)) + '\n'
         elif options.random:
             line = ''.join(random.choice(string.ascii_letters)
-                           for _ in range(linesize))
+                           for _ in range(block))
         newfile.write(line)
         newfile.flush()
 
