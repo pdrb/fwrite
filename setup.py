@@ -8,13 +8,13 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 
-version = '0.1'
+version = '0.2'
 
 
 setup(
     name='fwrite',
     version=version,
-    description='create files of the desired size',
+    description='Create files of the desired size',
     long_description=long_description,
     author='Pedro Buteri Gonring',
     author_email='pedro@bigode.net',

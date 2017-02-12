@@ -33,15 +33,13 @@ Usage
 
 ::
 
-    Usage: fwrite filename size [options]
+    Usage: fwrite.py filename size [options]
 
-    create files of the desired size
+    create files of the desired size, e.g., 'fwrite test 10M'
 
     Options:
     --version       show program's version number and exit
     -h, --help      show this help message and exit
-    -u UNIT         unit of measurement: kb, mb or gb
-                    (default: kb)
     -r, --random    use random data (very slow)
     -n, --newlines  append new line every 1023 bytes
 
@@ -52,19 +50,19 @@ Create file "test" with 100KB:
 
 ::
 
-    $ fwrite test 100
+    $ fwrite test 100K
 
 Create "test" with 1GB:
 
 ::
 
-    $ fwrite test 1 -u gb
+    $ fwrite test 1G
 
 Create "test" with 10MB of random data with lines:
 
 ::
 
-    $ fwrite test 10 -u mb -r -n
+    $ fwrite test 10M -r -n
 
 Notes
 -----
