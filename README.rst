@@ -33,7 +33,7 @@ Usage
 
 ::
 
-    Usage: fwrite.py filename size [options]
+    Usage: fwrite filename size [options]
 
     create files of the desired size, e.g., 'fwrite test 10M'
 
