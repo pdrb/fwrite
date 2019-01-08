@@ -71,3 +71,6 @@ Notes
 
 - Works on Python 2 and Python 3
 - Tested on Linux and Windows
+
+
+.. |Downloads| image:: https://pepy.tech/badge/fwrite
