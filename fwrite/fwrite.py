@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 # fwrite 0.3
 # author: Pedro Buteri Gonring
@@ -87,7 +87,7 @@ def cli():
             line = ''.join(
                 [chars_list[int(random() * 52)] for _ in range(block)]
             )
-        newfile.write(line)
+        newfile.write(line.encode('ascii'))
         newfile.flush()
 
     newfile.close()

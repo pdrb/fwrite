@@ -1,35 +1,37 @@
+|Downloads|
+
 fwrite
 =======
 
 Create files of the desired size.
 
+Simple example::
+
+    $ fwrite testfile 100M
+
+
 Install
--------
+=======
 
-Install using pip:
-
-::
+Install using pip::
 
     pip install fwrite
 
 or
 
-Download and set executable permission on the script file:
-
-::
+Download and set executable permission on the script file::
 
     chmod +x fwrite.py
 
 or
 
-Download and run using the python interpreter:
-
-::
+Download and run using the python interpreter::
 
     python fwrite.py
 
+
 Usage
------
+=====
 
 ::
 
@@ -43,29 +45,29 @@ Usage
     -r, --random    use random data (very slow)
     -n, --newlines  append new line every 1023 bytes
 
+
 Examples
---------
+========
 
-Create file "test" with 100KB:
-
-::
+Create file "test" with 100KB::
 
     $ fwrite test 100K
 
-Create "test" with 1GB:
-
-::
+Create file "test" with 1GB::
 
     $ fwrite test 1G
 
-Create "test" with 10MB of random data with lines:
+Create file "test" with 10MB of random data::
 
-::
+    $ fwrite test 10M -r
+
+Create file "test" with 10MB of random data with lines::
 
     $ fwrite test 10M -r -n
 
-Notes
------
 
-- Works on Python 2
+Notes
+=====
+
+- Works on Python 2 and Python 3
 - Tested on Linux and Windows
