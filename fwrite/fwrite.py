@@ -1,17 +1,17 @@
 #!/usr/bin/python
 
-# fwrite 0.2
+# fwrite 0.3
 # author: Pedro Buteri Gonring
 # email: pedro@bigode.net
-# date: 12/02/2017
+# date: 20190108
 
-import random
-import string
+from random import random
+from string import ascii_letters
 import optparse
 import sys
 
 
-version = '0.2'
+version = '0.3'
 
 
 # Parse and validate arguments
@@ -60,6 +60,9 @@ def cli():
     filename = args[0]
     size = int(args[1][:-1])
     block = 1024
+    if options.random:
+        # Acessing list elements is slightly faster than acessing string chars
+        chars_list = list(ascii_letters)
 
     if args[1][-1] == 'M':
         size = size * 1024
@@ -75,11 +78,15 @@ def cli():
 
     for _ in range(size):
         if options.random and options.newlines:
-            line = ''.join(random.choice(string.ascii_letters)
-                           for _ in range(block - 1)) + '\n'
+            # Using list comprehension and the random() trick to improve
+            # performance
+            line = ''.join(
+                [chars_list[int(random() * 52)] for _ in range(block-1)]
+            ) + '\n'
         elif options.random:
-            line = ''.join(random.choice(string.ascii_letters)
-                           for _ in range(block))
+            line = ''.join(
+                [chars_list[int(random() * 52)] for _ in range(block)]
+            )
         newfile.write(line)
         newfile.flush()
 
