@@ -10,6 +10,13 @@ Simple example::
     $ fwrite testfile 100M
 
 
+Notes
+=====
+
+- Works on Python 2 and Python 3
+- Uses only Python standard library for maximum compatibility
+
+
 Install
 =======
 
@@ -64,13 +71,6 @@ Create file "test" with 10MB of random data::
 Create file "test" with 10MB of random data with lines::
 
     $ fwrite test 10M -r -n
-
-
-Notes
-=====
-
-- Works on Python 2 and Python 3
-- Tested on Linux and Windows
 
 
 .. |Downloads| image:: https://pepy.tech/badge/fwrite
